@@ -823,31 +823,48 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
   <span class="small mut">Server Lokal / LAN</span></div>
  <hr style="border:0;border-top:1px solid var(--brd);margin:14px 0">
  
- <b style="font-size:13px">Mapping Struktur Tabel Legacy</b>
+ <b style="font-size:13px">Mapping Struktur Tabel Legacy → Cloud</b>
+ <div class="small mut" style="margin:4px 0 8px">Dikonfirmasi tim IT Laolexs — dipakai Desktop Sync Agent untuk upsert & read-mirror.</div>
  <div class="grid2" style="margin-top:8px">
    <div>
-     <div class="small mut">Tabel Stok / Produk</div>
-     <input class="input" value="dbo.Barang">
+     <div class="small mut">Sales Order (upsert)</div>
+     <input class="input" value="dbo.JualOrder_Mst + JualOrder_Det">
+   </div>
+   <div>
+     <div class="small mut">Key Sales Order</div>
+     <input class="input" value="KODE">
+   </div>
+   <div>
+     <div class="small mut">Penjualan / Invoice (DN)</div>
+     <input class="input" value="dbo.JualDN_Mst + JualDN_Det">
+   </div>
+   <div>
+     <div class="small mut">Join ke Sales Order</div>
+     <input class="input" value="LinkInvoice = JualOrder_Mst.KODE">
+   </div>
+   <div>
+     <div class="small mut">Tabel Produk</div>
+     <input class="input" value="dbo.BarangID">
+   </div>
+   <div>
+     <div class="small mut">Identifier Produk</div>
+     <input class="input" value="KODE atau PN (Part Number)">
    </div>
    <div>
      <div class="small mut">Kolom Gudang Aktif (Stock)</div>
      <input class="input" value="WH19">
    </div>
    <div>
-     <div class="small mut">Tabel Poin Sales</div>
-     <input class="input" value="dbo.Sales">
+     <div class="small mut">Tabel Customer / Toko</div>
+     <input class="input" value="dbo.Customers (key: KODE)">
    </div>
    <div>
-     <div class="small mut">Kolom Total Poin</div>
-     <input class="input" value="Point">
+     <div class="small mut">Tabel Sales / MD</div>
+     <input class="input" value="dbo.SalesID (key: SalesID)">
    </div>
    <div>
-     <div class="small mut">Tabel Piutang / Invoice</div>
-     <input class="input" value="dbo.Piutang">
-   </div>
-   <div>
-     <div class="small mut">Kolom Sisa Piutang</div>
-     <input class="input" value="SisaHutang">
+     <div class="small mut">Piutang / Payment (AR)</div>
+     <input class="input" value="dbo.ARPayment_Mst + Detail ⚠️ perkiraan">
    </div>
  </div>
 
@@ -881,7 +898,7 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
  <span style="cursor:pointer" data-close="dW05">✕</span></div>
  <p class="small mut" style="margin:12px 0">SyncLog.errorMessage — mirror PointLedger</p>
  <div class="m-card small" style="font-family:monospace;background:#FDF1F0;border:1px solid #F5C6C0">
-  SqlException: Cannot find column [Point] in dbo.Sales snapshot 2026-08-24T22:40Z.<br>Retry: 2/5 (backoff 8s)</div>
+  SqlException: Cannot find column [Point] in dbo.JualDN_Mst snapshot 2026-08-24T22:40Z.<br>Retry: 2/5 (backoff 8s)</div>
  <div class="small mut" style="margin-top:10px">Heartbeat: agent masih hidup — siklus lanjut tanpa tabel gagal (mutex aktif).</div></div></div></div></section><section class="screen" id="S-W06"><div style="padding:0 20px"><div class="back-m-btn" onclick="goBack()">← Kembali</div></div><div class="web"><div class="side"><div class="side-toggle" onclick="this.parentElement.classList.toggle('collapsed')">=</div><div class="lg">LAOLEXS</div><div class="sub">CMS ADMIN</div><a data-nav="W02" class=""><span class="dot"></span><text>Dashboard</text></a><a data-nav="W03" class=""><span class="dot"></span><text>Stock Sync</text></a><a data-nav="W05" class=""><span class="dot"></span><text>Sync Status</text></a><a data-nav="W06" class="on"><span class="dot"></span><text>Audit Trail</text></a><a data-nav="W04" class=""><span class="dot"></span><text>Konfigurasi Sync</text></a><a data-nav="W08" class=""><span class="dot"></span><text>Master Data</text></a><a data-nav="W07" class=""><span class="dot"></span><text>Manajemen Promo</text></a><a data-nav="W10" class=""><span class="dot"></span><text>Approval Klaim ??</text></a><a data-nav="W11" class=""><span class="dot"></span><text>Mapping Loyalty ??</text></a><a data-nav="W12" class=""><span class="dot"></span><text>Broadcast FCM ??</text></a><a data-nav="W09" class=""><span class="dot"></span><text>Piutang</text></a><a data-nav="W13" class=""><span class="dot"></span><text>Payment ??</text></a></div><div class="main"><div class="topbar"><h2>Audit Trail</h2><div class="avatar">L</div></div>
 <div class="fx-row" style="margin-bottom:12px"><input class="input" style="max-width:200px" value="24 Aug 2026">
  <input class="input" style="max-width:200px" placeholder="Aktor"><input class="input" style="max-width:200px" placeholder="Aksi"></div>
@@ -936,13 +953,16 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
 <table class="tb"><tr><th>Kode</th><th>Nama Toko</th><th>Kota</th><th>Tier</th><th>Status</th></tr>
 <tr><td>TK-001</td><td>Toko Makmur</td><td>Medan</td><td><span class="m-badge b-mut">Silver</span></td><td><span class="m-badge b-ok">Aktif</span></td></tr>
 <tr><td>TK-002</td><td>Toko Sinar</td><td>Pematang Siantar</td><td><span class="m-badge b-gold">Gold</span></td><td><span class="m-badge b-ok">Aktif</span></td></tr>
-<tr><td>TK-003</td><td>Toko Rejeki</td><td>Binjai</td><td><span class="m-badge b-gold" style="background:#F0E6FA;color:#6A3FB0">Platinum</span></td><td><span class="m-badge b-warn">Nonaktif</span></td></tr></table></div>
+<tr><td>TK-003</td><td>Toko Rejeki</td><td>Binjai</td><td><span class="m-badge b-gold" style="background:#F0E6FA;color:#6A3FB0">Platinum</span></td><td><span class="m-badge b-warn">Nonaktif</span></td></tr></table>
+<div class="small mut" style="margin-top:6px">Sumber: <b>dbo.Customers</b> (key: KODE)</div></div>
 <div data-tabp="md" style="display:none"><table class="tb"><tr><th>Nama</th><th>Area</th><th>Toko Binaan</th></tr>
-<tr><td>Andi (MD)</td><td>Medan Utara</td><td>12</td></tr><tr><td>Rina</td><td>Tebing Tinggi</td><td>9</td></tr></table></div>
+<tr><td>Andi (MD)</td><td>Medan Utara</td><td>12</td></tr><tr><td>Rina</td><td>Tebing Tinggi</td><td>9</td></tr></table>
+<div class="small mut" style="margin-top:6px">Sumber: <b>dbo.SalesID</b> (key: SalesID)</div></div>
 <div data-tabp="dist" style="display:none"><table class="tb"><tr><th>Distributor</th><th>Coverage</th></tr>
 <tr><td>PT Sejahtera</td><td>Sumatera Utara</td></tr></table></div>
 <div data-tabp="prod" style="display:none"><table class="tb"><tr><th>SKU</th><th>Produk</th><th>Poin Rule (XAI)</th></tr>
-<tr><td>KCM-600</td><td>Kecap Manis 600ml</td><td>10 pts/dus (mirror dbo.BarangId)</td></tr></table></div></div></div></section><section class="screen" id="S-W09"><div style="padding:0 20px"><div class="back-m-btn" onclick="goBack()">← Kembali</div></div><div class="web"><div class="tierpill m-badge" style="background:#E3EDFF;color:#1D4FB8;font-size:12px;padding:6px 14px">⚖️ MULAI PAKET MENENGAH</div><div class="side"><div class="side-toggle" onclick="this.parentElement.classList.toggle('collapsed')">=</div><div class="lg">LAOLEXS</div><div class="sub">CMS ADMIN</div><a data-nav="W02" class=""><span class="dot"></span><text>Dashboard</text></a><a data-nav="W03" class=""><span class="dot"></span><text>Stock Sync</text></a><a data-nav="W05" class=""><span class="dot"></span><text>Sync Status</text></a><a data-nav="W06" class=""><span class="dot"></span><text>Audit Trail</text></a><a data-nav="W04" class=""><span class="dot"></span><text>Konfigurasi Sync</text></a><a data-nav="W08" class=""><span class="dot"></span><text>Master Data</text></a><a data-nav="W07" class=""><span class="dot"></span><text>Manajemen Promo</text></a><a data-nav="W10" class=""><span class="dot"></span><text>Approval Klaim ??</text></a><a data-nav="W11" class=""><span class="dot"></span><text>Mapping Loyalty ??</text></a><a data-nav="W12" class=""><span class="dot"></span><text>Broadcast FCM ??</text></a><a data-nav="W09" class="on"><span class="dot"></span><text>Piutang</text></a><a data-nav="W13" class=""><span class="dot"></span><text>Payment ??</text></a></div><div class="main"><div class="topbar"><h2>Dashboard Piutang</h2><div class="avatar">L</div></div>
+<tr><td>KCM-600</td><td>Kecap Manis 600ml</td><td>10 pts/dus (mirror dbo.BarangID, key: KODE/PN)</td></tr></table>
+<div class="small mut" style="margin-top:8px">Toko ← <b>dbo.Customers</b> (KODE) · MD ← <b>dbo.SalesID</b> (SalesID) · Produk ← <b>dbo.BarangID</b> (KODE/PN)</div></div></div></div></section><section class="screen" id="S-W09"><div style="padding:0 20px"><div class="back-m-btn" onclick="goBack()">← Kembali</div></div><div class="web"><div class="tierpill m-badge" style="background:#E3EDFF;color:#1D4FB8;font-size:12px;padding:6px 14px">⚖️ MULAI PAKET MENENGAH</div><div class="side"><div class="side-toggle" onclick="this.parentElement.classList.toggle('collapsed')">=</div><div class="lg">LAOLEXS</div><div class="sub">CMS ADMIN</div><a data-nav="W02" class=""><span class="dot"></span><text>Dashboard</text></a><a data-nav="W03" class=""><span class="dot"></span><text>Stock Sync</text></a><a data-nav="W05" class=""><span class="dot"></span><text>Sync Status</text></a><a data-nav="W06" class=""><span class="dot"></span><text>Audit Trail</text></a><a data-nav="W04" class=""><span class="dot"></span><text>Konfigurasi Sync</text></a><a data-nav="W08" class=""><span class="dot"></span><text>Master Data</text></a><a data-nav="W07" class=""><span class="dot"></span><text>Manajemen Promo</text></a><a data-nav="W10" class=""><span class="dot"></span><text>Approval Klaim ??</text></a><a data-nav="W11" class=""><span class="dot"></span><text>Mapping Loyalty ??</text></a><a data-nav="W12" class=""><span class="dot"></span><text>Broadcast FCM ??</text></a><a data-nav="W09" class="on"><span class="dot"></span><text>Piutang</text></a><a data-nav="W13" class=""><span class="dot"></span><text>Payment ??</text></a></div><div class="main"><div class="topbar"><h2>Dashboard Piutang</h2><div class="avatar">L</div></div>
 <div class="fx-row" style="align-items:flex-start;gap:14px;margin-bottom:14px">
  <div class="stat" style="flex:1"><div class="lb">Total Outstanding</div><div class="vl">Rp6.250.000</div>
   <div class="small mut">218 toko aktif</div></div>
@@ -954,7 +974,7 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
 <div data-tabp="p"><table class="tb"><tr><th>Invoice</th><th>Toko</th><th>Sisa</th><th>Jatuh Tempo</th><th>Status</th><th>Sync Lokal</th></tr>
 <tr><td>INV/08/0102</td><td>Toko Makmur</td><td>Rp4.250.000</td><td>30 Aug</td><td><span class="m-badge b-warn">Belum Bayar</span></td><td><span class="m-badge b-ok">Tersinkron</span></td></tr>
 <tr><td>INV/08/0098</td><td>Toko Sinar</td><td>Rp2.000.000</td><td>27 Aug</td><td><span class="m-badge b-bad">Overdue</span></td><td><span class="m-badge b-warn">Pending</span></td></tr></table>
-<div class="small mut" style="margin-top:8px">⚖️ Menengah: read-only · 🏆 Ideal: pelunasan via Midtrans + write-back ke legacy dbo.Piutang.</div></div>
+<div class="small mut" style="margin-top:8px">⚖️ Menengah: read-only · 🏆 Ideal: pelunasan via Midtrans + write-back ke legacy dbo.ARPayment_Mst/Detail (nama perkiraan, menunggu konfirmasi).</div></div>
 <div data-tabp="r" style="display:none"><table class="tb"><tr><th>Waktu</th><th>Invoice</th><th>Nominal</th><th>Sumber</th></tr>
 <tr><td>24 Aug 10:12</td><td>INV/08/0091</td><td>Rp500.000 (parsial)</td><td>Midtrans QRIS</td></tr>
 <tr><td>21 Aug 08:40</td><td>INV/07/0088</td><td>Rp28.000.000 (lunas)</td><td>Kasir XAI</td></tr></table></div></div></div></section><section class="screen" id="S-W10"><div style="padding:0 20px"><div class="back-m-btn" onclick="goBack()">← Kembali</div></div><div class="web"><div class="tierpill m-badge" style="background:#DFF5E8;color:#116A3D;font-size:12px;padding:6px 14px">🚀 MULAI PAKET CEPAT</div><div class="side"><div class="side-toggle" onclick="this.parentElement.classList.toggle('collapsed')">=</div><div class="lg">LAOLEXS</div><div class="sub">CMS ADMIN</div><a data-nav="W02" class=""><span class="dot"></span><text>Dashboard</text></a><a data-nav="W03" class=""><span class="dot"></span><text>Stock Sync</text></a><a data-nav="W05" class=""><span class="dot"></span><text>Sync Status</text></a><a data-nav="W06" class=""><span class="dot"></span><text>Audit Trail</text></a><a data-nav="W04" class=""><span class="dot"></span><text>Konfigurasi Sync</text></a><a data-nav="W08" class=""><span class="dot"></span><text>Master Data</text></a><a data-nav="W07" class=""><span class="dot"></span><text>Manajemen Promo</text></a><a data-nav="W10" class="on"><span class="dot"></span><text>Approval Klaim ??</text></a><a data-nav="W11" class=""><span class="dot"></span><text>Mapping Loyalty ??</text></a><a data-nav="W12" class=""><span class="dot"></span><text>Broadcast FCM ??</text></a><a data-nav="W09" class=""><span class="dot"></span><text>Piutang</text></a><a data-nav="W13" class=""><span class="dot"></span><text>Payment ??</text></a></div><div class="main"><div class="topbar"><h2>Approval Klaim Promo</h2><div class="avatar">L</div></div>
@@ -971,7 +991,7 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
      <button class="m-btn sm" style="background:#FBE4E1;color:#A33227" data-toast="Klaim ditolak — push FCM terkirim">Tolak</button></td></tr>
 <tr><td>21 Aug</td><td>Andi (MD)</td><td>Toko Rejeki</td><td>CROSS_BRAND</td><td>Rp980.000</td><td><span class="m-badge b-ok">Disetujui</span></td><td></td></tr></table>
 <div class="small mut" style="margin-top:10px">Kuota & periode claim diatur di Manajemen Promo. Keputusan terkirim sebagai notifikasi (M14 pada tier Menengah+).</div></div></div></section><section class="screen" id="S-W11"><div style="padding:0 20px"><div class="back-m-btn" onclick="goBack()">← Kembali</div></div><div class="web"><div class="tierpill m-badge" style="background:#DFF5E8;color:#116A3D;font-size:12px;padding:6px 14px">🚀 MULAI PAKET CEPAT</div><div class="side"><div class="side-toggle" onclick="this.parentElement.classList.toggle('collapsed')">=</div><div class="lg">LAOLEXS</div><div class="sub">CMS ADMIN</div><a data-nav="W02" class=""><span class="dot"></span><text>Dashboard</text></a><a data-nav="W03" class=""><span class="dot"></span><text>Stock Sync</text></a><a data-nav="W05" class=""><span class="dot"></span><text>Sync Status</text></a><a data-nav="W06" class=""><span class="dot"></span><text>Audit Trail</text></a><a data-nav="W04" class=""><span class="dot"></span><text>Konfigurasi Sync</text></a><a data-nav="W08" class=""><span class="dot"></span><text>Master Data</text></a><a data-nav="W07" class=""><span class="dot"></span><text>Manajemen Promo</text></a><a data-nav="W10" class=""><span class="dot"></span><text>Approval Klaim ??</text></a><a data-nav="W11" class="on"><span class="dot"></span><text>Mapping Loyalty ??</text></a><a data-nav="W12" class=""><span class="dot"></span><text>Broadcast FCM ??</text></a><a data-nav="W09" class=""><span class="dot"></span><text>Piutang</text></a><a data-nav="W13" class=""><span class="dot"></span><text>Payment ??</text></a></div><div class="main"><div class="topbar"><h2>Config Loyalty — Mapping CST</h2><div class="avatar">L</div></div>
-<div class="m-card small" style="background:var(--nv1);border:0">Tipe member dipetakan ke kolom harga CST legacy (<b>dbo.BarangId</b>).
+<div class="m-card small" style="background:var(--nv1);border:0">Tipe member dipetakan ke kolom harga CST legacy (<b>dbo.BarangID</b>).
  Sistem baru hanya mengubah <b>mapping</b> ini — tidak pernah menulis ke legacy.</div>
 <div class="fx-row" style="align-items:flex-start;gap:14px;margin-top:12px">
 <table class="tb" style="flex:1.4"><tr><th>Tipe Member</th><th>Kolom CST</th><th>Status</th><th>Diubah</th></tr>
@@ -1025,7 +1045,7 @@ color:#fff;padding:60px;display:flex;flex-direction:column;justify-content:cente
 <tr><td>09:57</td><td>PAY-3390</td><td>Pelunasan INV-0087</td><td>BCA VA</td><td><b>Rp2.000.000</b></td><td><span class="m-badge b-ok">Berhasil</span></td></tr>
 <tr><td>09:31</td><td>PAY-3389</td><td>Bayar Order #LX-2080</td><td>GoPay</td><td><b>Rp1.245.000</b></td><td><span class="m-badge b-blue">Settlement</span></td></tr>
 <tr><td>08:12</td><td>PAY-3387</td><td>Bayar Order #LX-2079</td><td>Mandiri VA</td><td><b>Rp3.860.000</b></td><td><span class="m-badge b-warn">Pending</span></td></tr></table>
-<div class="small mut" style="margin-top:10px">🏆 IDEAL — bukti pelunasan ditulis balik ke legacy <b>dbo.Piutang</b> oleh Desktop Sync Agent (idempotent).</div></div></div></section>
+<div class="small mut" style="margin-top:10px">🏆 IDEAL — bukti pelunasan ditulis balik ke legacy <b>dbo.ARPayment_Mst/Detail</b> (perkiraan) oleh Desktop Sync Agent (idempotent).</div></div></div></section>
 <script>
 function go(id){location.hash='#/'+id}
 function show(){var id=(location.hash||'#/INDEX').slice(2)||'INDEX';
