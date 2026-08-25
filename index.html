@@ -268,6 +268,101 @@ padding:10px 18px;border-radius:10px;font-size:12.5px;display:none;z-index:99}
 
     </div>
   </div>
+
+  <!-- ================= INFRASTRUKTUR & BIAYA TAMBAHAN ================= -->
+  <div class="container mb-5" style="max-width:1100px">
+
+    <div class="text-center mb-4">
+      <h3 class="fw-bold"><i class="bi bi-hdd-network"></i> Pilihan Infrastruktur Server</h3>
+      <p class="text-muted">Server dipetakan 1:1 ke paket yang dipilih (Alibaba Cloud) — jalur bertahap: <b>Starter → Rekomendasi (+HA) → Roadmap (Kubernetes)</b>.</p>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <span class="badge bg-success mb-2"><i class="bi bi-rocket-takeoff"></i> CEPAT</span>
+            <h6 class="fw-bold">Starter</h6>
+            <p class="small text-secondary mb-2">1 Simple Application Server (all-in-one): <b>1 VM App + 1 DB dalam 1 server</b> (2 vCPU/4GB). Cocok MVP, budget ketat.</p>
+            <div class="small text-muted border-top pt-2">Rp 300.000 – 450.000 / bulan</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm border-top border-4" style="border-color:#D9A441 !important">
+          <div class="card-body">
+            <span class="badge" style="background:#D9A441;color:#3A2B08"><i class="bi bi-balance-scale"></i> MENENGAH</span>
+            <h6 class="fw-bold">Rekomendasi (+ HA)</h6>
+            <p class="small text-secondary mb-2"><b>1 VM App terpisah + 1 server DB (RDS High Availability, primary+standby)</b> — kelas Menengah/Ideal. Failover otomatis kalau DB utama bermasalah.</p>
+            <div class="small text-muted border-top pt-2">Rp 1.500.000 – 7.000.000 / bulan (Menengah–Ideal)</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm bg-light">
+          <div class="card-body">
+            <span class="badge bg-dark"><i class="bi bi-signpost-split"></i> ROADMAP</span>
+            <h6 class="fw-bold">Next Step: Kubernetes</h6>
+            <p class="small text-secondary mb-2">Kalau traffic tumbuh melebihi kapasitas Ideal (2× ECS + RDS cross-AZ), langkah berikutnya migrasi ke <b>Kubernetes terkelola</b> (mis. Alibaba ACK). <i>Bukan kebutuhan sekarang</i> — dicatat sebagai arah masa depan saja.</p>
+            <div class="small text-muted border-top pt-2">Belum ada estimasi biaya — evaluasi saat dibutuhkan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-primary small mb-5"><i class="bi bi-lightbulb"></i> <b>Rekomendasi "start small":</b> server development/staging (untuk UAT) sengaja dibuat KECIL (2 vCPU/2–4GB, ±Rp150rb–1jt/bulan) — cukup untuk pengujian sebelum rilis, bukan meniru kapasitas produksi. Upgrade dilakukan hanya kalau benar-benar dibutuhkan.</div>
+
+    <div class="text-center mb-4">
+      <h3 class="fw-bold"><i class="bi bi-wallet2"></i> Biaya Pihak Ketiga Lain</h3>
+      <p class="text-muted">Di luar biaya development & server produksi — dibayar langsung oleh klien ke pihak terkait.</p>
+    </div>
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered bg-white align-middle">
+        <thead class="table-light"><tr><th>Item</th><th>Estimasi Biaya</th><th>Frekuensi</th><th>Berlaku Untuk</th></tr></thead>
+        <tbody>
+          <tr><td>Domain (registrar Alibaba Cloud)</td><td>~Rp 200.000</td><td>Tahunan</td><td>Semua paket</td></tr>
+          <tr><td>Google Play Console</td><td>$25 USD (~Rp 400.000)</td><td>Sekali bayar seumur hidup</td><td>Semua paket</td></tr>
+          <tr><td>Apple Developer Program</td><td>$99 USD/tahun (~Rp 1.500.000)</td><td>Tahunan</td><td>Semua paket</td></tr>
+          <tr><td>Firebase (Analytics + Crashlytics + FCM cadangan)</td><td><span class="badge bg-success">Gratis</span> (Spark Plan, skala proyek ini)</td><td>—</td><td>⚖️ Menengah ke atas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center mb-4">
+      <h3 class="fw-bold"><i class="bi bi-palette"></i> Referensi Harga Template UI (Opsional)</h3>
+      <p class="text-muted">Enam template React Native untuk referensi — <b>harga UI-only</b>, belum termasuk integrasi ke Backend API. Tidak mengubah estimasi MD manapun di atas.</p>
+    </div>
+    <div class="table-responsive mb-4">
+      <table class="table table-bordered bg-white align-middle">
+        <thead class="table-light"><tr><th>Template</th><th>Sumber</th><th>Harga (USD)</th><th>Estimasi (IDR)</th></tr></thead>
+        <tbody>
+          <tr><td>Velora Ecommerce</td><td>native-templates.com</td><td>$99</td><td>~Rp 1.584.000</td></tr>
+          <tr><td>Ecomark — E-commerce React Native CLI UI Kit</td><td>CodeCanyon (JsmThemes)</td><td>$79</td><td>~Rp 1.264.000</td></tr>
+          <tr><td>MStore Pro <span class="text-muted small">(link "Beostore", item sama)</span></td><td>CodeCanyon (InspireUI)</td><td>$69</td><td>~Rp 1.104.000</td></tr>
+          <tr><td>Carter — Grocery React Native App Template</td><td>CodeCanyon (GfxPartner)</td><td>$59</td><td>~Rp 944.000</td></tr>
+          <tr><td>Gmart — React Native Grocery Shopping App Template</td><td>CodeCanyon (WordPress-Studio)</td><td>$29</td><td>~Rp 464.000</td></tr>
+          <tr><td>Plantify — React Native Ecommerce</td><td>CodeCanyon (soadtech)</td><td>$20</td><td>~Rp 320.000</td></tr>
+        </tbody>
+      </table>
+      <p class="small text-muted">*Kurs asumsi ±Rp16.000/USD, harga dapat berubah — cek link resmi sebelum membeli. Kalau template dipilih, penyesuaian MD/harga development dihitung terpisah lewat mekanisme Change Request.</p>
+    </div>
+
+    <div class="text-center mb-4">
+      <h3 class="fw-bold"><i class="bi bi-calculator"></i> Ringkasan Total Estimasi Investasi per Paket</h3>
+      <p class="text-muted">Development + Server + Biaya pihak ketiga — gambaran biaya total, bukan cuma harga development.</p>
+    </div>
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered bg-white align-middle text-center">
+        <thead class="table-light"><tr><th class="text-start">Komponen</th><th>🚀 Cepat</th><th>⚖️ Menengah</th><th>🏆 Ideal</th></tr></thead>
+        <tbody>
+          <tr><td class="text-start">Development (MD × rate)</td><td>60 MD → Rp 30.000.000</td><td>86 MD → Rp 43.000.000</td><td>140 MD → Rp 70.000.000</td></tr>
+          <tr><td class="text-start">Server Produksi / bulan</td><td>Rp 300rb – 450rb</td><td>Rp 1,5jt – 2,5jt</td><td>Rp 4,5jt – 7jt</td></tr>
+          <tr><td class="text-start">Dev + Staging / bulan</td><td>Rp 150rb – 250rb</td><td>Rp 600rb – 1jt</td><td>Rp 850rb – 1,4jt</td></tr>
+          <tr><td class="text-start">Pihak Ketiga (tahunan)*</td><td colspan="3">± Rp 1.900.000 (Domain + Play + Apple, sama semua paket; Firebase gratis mulai Menengah)</td></tr>
+        </tbody>
+      </table>
+      <p class="small text-muted">*Belum termasuk rate Change Request (Rp500.000/MD) bila ada penambahan scope setelah kontrak berjalan. Semua angka server & pihak ketiga adalah estimasi internal — validasi ulang lewat kalkulator resmi vendor saat implementasi.</p>
+    </div>
+
+  </div>
 </section>
 
 <section class="screen" id="S-PKG-CEPAT-MOBILE">
