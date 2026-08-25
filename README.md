@@ -6,17 +6,15 @@
 
 ## 🚀 Quick View
 
-Click any link below to view the mockup in your browser:
+**Buka mockup interaktif:** [https://leonardo10.github.io/laolexs-mockups/](https://leonardo10.github.io/laolexs-mockups/)
 
-| Tier | Description | View Link |
-|---|---|---|
-| 🚀 Cepat | MVP Mobile App (12 screens) | [View Cepat](./cepat/index.html) |
-| ⚖️ Menengah | Standard Package (13 screens) | [View Menengah](./menengah/index.html) |
-| 🏆 Ideal | Enterprise Package (14 screens + Payment) | [View Ideal](./ideal/index.html) |
-| 🖥️ Web CMS | Admin Dashboard (13 pages) | [View CMS Admin](./cms_admin/index.html) |
-| 💻 Sync Agent | Desktop Sync Service UI | [View Sync Agent](./sync_agent/index.html) |
+Alur navigasi di dalam mockup:
 
-> **Note:** All mockups are **static HTML** — just open the file in Chrome/Firefox/Edge.
+1. **Pilih Paket** — 🚀 Cepat / ⚖️ Menengah / 🏆 Ideal
+2. **Pilih Platform** — tombol 📱 *Detail Mobile* atau 💻 *Detail Web* pada kartu paket
+3. **Pilih Fitur** — daftar layar yang tampil sudah difilter sesuai paket yang dipilih (mis. paket Cepat hanya menampilkan fitur Cepat)
+
+> **Note:** Mockup adalah **static HTML** — bisa juga dibuka langsung via `index.html` di Chrome/Firefox/Edge.
 
 ---
 
@@ -75,10 +73,10 @@ The Sync Agent runs as a **headless Windows Service** (no GUI). This mockup show
 
 ## 📊 How to Use This Mockup
 
-1. **Open `index.html`** in any modern browser (Chrome/Firefox/Edge)
-2. **Click any screen** from the dashboard board
-3. **Navigate between screens** using the sidebar (mobile) or header (web)
-4. **View tier badge** in top-right corner to confirm current tier
+1. **Buka** [https://leonardo10.github.io/laolexs-mockups/](https://leonardo10.github.io/laolexs-mockups/) (atau `index.html` secara lokal)
+2. **Pilih paket** (Cepat / Menengah / Ideal) lalu klik **Detail Mobile** atau **Detail Web**
+3. **Klik fitur** dari daftar untuk melihat layar, lalu **navigasi antar layar** via sidebar (web) atau bottom nav (mobile)
+4. Tombol **← Kembali** mengembalikan ke daftar fitur; badge tier di pojok menandai cakupan paket
 
 ---
 
